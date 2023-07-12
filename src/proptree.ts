@@ -1,13 +1,14 @@
 import { DuplicatePropDefError } from "./duplicatepropdeferror";
 import { GeneralType } from "./generaltype";
+import { Branch, createBranch } from "./branch";
 
 
 export class PropTree<PropBase = any, Structure = {}>
 {
-    public readonly props: Structure;
+    public readonly props: Structure & Branch;
 
     constructor(props: Structure) {
-        this.props = props;
+        this.props = createBranch(props);
     }
 
     add<PropKey extends string, Value extends PropBase>(
