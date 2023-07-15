@@ -38,3 +38,11 @@ test("proptree", () => {
     expect(ptree.props.someGroup.usingAllProp).toBe("42");
 
 });
+
+test("proptree: invalid group", () => {
+    const someTree = PropTree.new<number>()
+        .addVal("a", 1)
+    ;
+
+    expect(() => PropTree.new<number>().group("b", () => someTree)).toThrow();
+});

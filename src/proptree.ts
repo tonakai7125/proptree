@@ -30,7 +30,10 @@ export class PropTree<PropBase = any, Structure = {}>
         name: PropKey,
         groupConstructor: (group: PropTree<PropBase>, props: Structure) => PropTree<PropBase,SubStructure>
     ) {
-        PropTree.addProp(this.props, name, groupConstructor(PropTree.new<PropBase>(), this.props).props)
+        const e = PropTree.new<PropBase>();
+        const g = groupConstructor(e, this.props);
+        if (!Object.is(e, g)) throw Error("Unexpected group tree is given. First argument of 'groupConstructor' should be returned after adding any properties.")
+        PropTree.addProp(this.props, name, g.props)
         return this as PropTree<PropBase, Structure & Record<PropKey, SubStructure>>
     }
 
