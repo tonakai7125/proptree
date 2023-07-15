@@ -23,7 +23,7 @@ test("iter_bfs", () => {
     const result = [...iter_BFS(pt)];
 
     //check output
-    console.log(result);
+    //console.log(result);
 
     //check if result contains all properties as depth first order.
     expect(result.every((r, i) => {
